@@ -68,12 +68,12 @@ function bg() {
   app.appendChild(el);
 }
 function bg2() {
-  var first = randomColor(0, 255);
-  var second = randomColor(0, 255);
-  var third = randomColor(0, 255);
-  document.body.style.backgroundColor =
-    "#" + first.toString(16) + second.toString(16) + third.toString(16);
-  txt.innerHTML = "#" + first.toString(16) + second.toString(16) + third.toString(16);
+  var first = randomColor(0, 255).toString(16).padStart(2,0);
+  var second = randomColor(0, 255).toString(16).padStart(2,0);
+  var third = randomColor(0, 255).toString(16).padStart(2,0);
+  document.body.style.backgroundColor = "#" + first + second + third;
+  txt.innerHTML = "#" + first + second + third;
+  
   el.appendChild(txt);
   app.appendChild(el);
 }
