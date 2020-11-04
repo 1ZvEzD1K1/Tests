@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>tests 2</title>
+    <link rel="stylesheet" href="css/style.min.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="testBlock hover">
+        <button class="iButton" id="mouseHover">1. Hover!</button>
+        <ul id="hoverResult" class="resultBlock"></ul>
+      </div>
+
+      <div class="testBlock click">
+        <button class="iButton" id="mouseClick">2. Click for do things</button>
+        <div
+          id="clickResult"
+          class="resultBlock one two three four five six"
+        ></div>
+      </div>
+
+      <div class="testBlock random">
+        <button class="iButton" id="mouseLight">
+          3. Click for turn on lights
+        </button>
+        <div id="lightResult" class="resultBlock"></div>
+      </div>
+
+      <div class="testBlock keyboard">
+        <button class="iButton" id="keyboardButton">4. Press any key</button>
+        <div id="keyboardResult" class="resultBlock key-colors"></div>
+      </div>
+    </div>
+
+    <script>
+      /*
+
+      Поработаем немного с ивентами:
+      onmouseenter
+      onclick
+      oncontextmenu
+      onkeydown
+
+      Задание:
+      На каждую из конопок назначить действие которое будет выполнять следующее действие:
+      1.На ховер(onmouseenter) повесить обработчик который будет при каждом наведении
+        на кнопку будет выводить в блок результатом елемент li с текстом "hovered!"
+        у которого будет один из следующих класов:
+        red blue green orange purple
+
+      2.На кнопку клика(onclick) повесить обработчик который будет удалять классы с
+        блока с результатом по очереди в таком порядке:
+
+        six > two > three > four > one > five
+
+        после того как блок окажется пустым, добавить их в порядке возрастания
+
+        one > two > three ... > six
+
+      3. На кнопку клика (Light) повесить обработчик, который будет выводить в 
+      блок с результатом (lightResult) поочередно один из цветов светофора:
+      Цикл: Off -> Red -> Yellow -> Green -> Off
+
+      4. На кнопку с обработчиком нажатия (onkeydown) повесить обработчик который будет:
+
+        - Выводить в блок с результатом(keyboardResult) число нажатий на любую из клавиш клавиатуры.
+        - Давать блоку (keyboardResult) классы, которые соотсветствуют числу кликов:
+
+        Н-р:
+        1 -> one
+        3 -> three
+        5 -> five
+        11 -> one one
+        115 -> one one five
+
+
+
+    */
+
+      var mouseHover = document.getElementById("mouseHover");
+      var mouseClick = document.getElementById("mouseClick");
+      var mouseLight = document.getElementById("mouseLight");
+      var keyboardButton = document.getElementById("keyboardButton");
+      var res1 = document.getElementById("hoverResult");
+
+      mouseHover.onmouseenter = function () {
+        var colors = Array("red", "blue", "green", "orange", "purple");
+        var rand = colors[Math.floor(Math.random() * colors.length)];
+        var li = document.createElement("li");
+        li.innerText = "Hovered!";
+        li.className = rand;
+        res1.appendChild(li);
+      };
+
+      var clickIndex = 0;
+      var res2 = document.getElementById("clickResult");
+
+      mouseClick.onclick = function () {
+        if (clickIndex == 0) {
+          res2.classList.remove("six");
+        } else if (clickIndex == 1) {
+          res2.classList.remove("two");
+        } else if (clickIndex == 2) {
+          res2.classList.remove("three");
+        } else if (clickIndex == 3) {
+          res2.classList.remove("four");
+        } else if (clickIndex == 4) {
+          res2.classList.remove("one");
+        } else if (clickIndex == 5) {
+          res2.classList.remove("five");
+        } else if (clickIndex == 6) {
+          res2.classList.add("one");
+        } else if (clickIndex == 7) {
+          res2.classList.add("two");
+        } else if (clickIndex == 8) {
+          res2.classList.add("three");
+        } else if (clickIndex == 9) {
+          res2.classList.add("four");
+        } else if (clickIndex == 10) {
+          res2.classList.add("five");
+        } else if (clickIndex == 11) {
+          res2.classList.add("six");
+        } else {
+          clickIndex = -1;
+        }
+        clickIndex++;
+      };
+
+      var res3 = document.getElementById("lightResult");
+      var colors = ["", "red", "yellow", "green", ""];
+
+
+      mouseLight.onclick = function () {
+        var i = 0;
+        var color = setInterval(()=>{
+          res3.style.background = colors[i];
+          i++;
+          if (i>colors.length-1) {
+            clearInterval(color);
+          }
+        }, 1000);
+      };
+
+      var counter = 0;
+      var res4 = document.getElementById("keyboardResult");
+      var el = document.createElement("p");
+      res4.appendChild(el);
+      keyboardButton.onkeydown = function () {
+        counter++;
+        el.innerText = String(counter);
+        res4.appendChild(el);
+      };
+    </script>
+  </body>
+</html>

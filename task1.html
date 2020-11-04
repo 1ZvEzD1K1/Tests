@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>test 1</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+</head>
+<body>
+  <div id="target"></div>
+
+  <script>
+    /*
+      1. Выбрать блок Target
+      2. Cоздать див внутри этого блока
+      3. Добавить ему 3 класса "Ctrl Shift Delete" используя свойство className
+      4. Добавиь класс через метод add
+      5. Удалить класс "Delete"
+      6. Применить метод toggle на класс "Command"
+    */
+   var block = document.getElementById("target");
+   var div = document.createElement('div');
+   div.className = "Ctrl Shift Delete";
+   div.classList.add("someClass");
+   div.classList.remove("Delete");
+   div.classList.toggle("Command");
+   console.log(div);
+   block.appendChild(div);
+
+  </script>
+</body>
+</html>
