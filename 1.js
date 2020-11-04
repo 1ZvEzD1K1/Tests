@@ -60,3 +60,9 @@ buts.forEach((el) => {
     tab[el.dataset.tab - 1].classList.toggle("active");
   };
 });
+
+tab.forEach((eltab) => {
+  eltab.onclick = () => {
+    tab[eltab.dataset.tab - 1].classList.remove("active");
+  };
+});
