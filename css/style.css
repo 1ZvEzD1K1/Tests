@@ -1,0 +1,118 @@
+body {
+  box-sizing: border-box;
+  padding: 10px 20px 30px;
+  background: #eee;
+  font-family: sans-serif;
+}
+
+.wrap {
+  margin: 10px 20px;
+  background: #fff;
+  padding: 10px 20px 30px;
+}
+.buttonAnimated {
+  width: 100px;
+  height: 30px;
+  background: white;
+  transition: 1s;
+  outline: none;
+}
+.buttonAnimated.animation {
+  width: 350px;
+  height: 50px;
+  background: red;
+}
+/* .eventButton{
+
+} */
+.eventButton.unactive {
+  background: #eee;
+  color: #a8a8a8;
+}
+
+#error {
+  color: red;
+}
+
+#bubbleParent {
+  margin-top: 20px;
+  padding: 20px 30px;
+  border: 1px solid blue;
+}
+#bubbleParent:hover {
+  background: blue;
+}
+#bubbleChild {
+  padding: 20px 30px;
+  border: 1px solid red;
+}
+#bubbleChild:hover {
+  background: red;
+}
+
+/* .animated {
+  animation-name: slid;
+	animation-duration: 3s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+  width: 300px;
+	height: 300px;
+	position: absolute;
+	top: 0;
+	left: 100px;
+} */
+
+/* @-webkit-keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-o-keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+} */
+
+.slider {
+	width: 500px;
+	height: 700px;
+	margin: auto;
+	margin-top: 25px;
+	position: relative;
+	overflow: hidden;
+}
+
+/* @keyframes slid {
+    from {
+     top: 0;
+     left: 0;
+    }
+    12.5% {
+     transform: translate(0px, 0px);
+    }
+    25% {
+     transform: translate(-500px, 0);
+    }
+    36% {
+     transform: translate(-500px, 300px);
+    }
+    37% {
+     transform: translate(500px, 300px);
+    }
+    87.5% {
+     transform: translate(500px, 0);
+     
+    }
+    to {
+     transform: (0px, 0px);
+    }
+  } */
