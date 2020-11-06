@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Task 3</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+      <h1>Переключение слайдера</h1>
+      <div class="roadMap__container yellow">
+        <button class="navButton" data-direction="<">Prev</button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint ball" data-id="2"></div>
+          <div class="roadMapPoint" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+          <div class="roadMapPoint" data-id="5"></div>
+          <div class="roadMapPoint" data-id="6"></div>
+          <div class="roadMapPoint" data-id="7"></div>
+          <div class="roadMapPoint" data-id="8"></div>
+        </div>
+        <button class="navButton" data-direction=">">Next</button>
+      </div>
+
+      <div class="roadMap__container red">
+        <button class="navButton" data-direction="<">Prev</button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint" data-id="2"></div>
+          <div class="roadMapPoint ball" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">">Next</button>
+      </div>
+
+      <div class="roadMap__container blue">
+        <button class="navButton" data-direction="<">Prev</button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint ball" data-id="2"></div>
+          <div class="roadMapPoint" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">">Next</button>
+      </div>
+
+      <div class="roadMap__container red">
+        <button class="navButton" data-direction="<">Prev</button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint" data-id="2"></div>
+          <div class="roadMapPoint ball" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">">Next</button>
+      </div>
+
+      <div class="roadMap__container blue">
+        <button class="navButton" data-direction="<">Prev</button>
+        <div class="roadMap">
+          <div class="roadMapPoint" data-id="1"></div>
+          <div class="roadMapPoint ball" data-id="2"></div>
+          <div class="roadMapPoint" data-id="3"></div>
+          <div class="roadMapPoint" data-id="4"></div>
+        </div>
+        <button class="navButton" data-direction=">">Next</button>
+      </div>
+    </div>
+    <script>
+      /*
+        Задание:
+
+        Написать скрипт, который будет приводить в действие переключалки из разметки.
+        И будет перемещать класс ball по точкам в зависимости от нажатой кнопки
+
+      */
+
+      var containers = document.querySelectorAll(".roadMap__container");
+      containers.forEach(function (container) {
+        //console.log( container );
+        //console.log( ball.dataset.id );
+        var btn = container.querySelectorAll(".navButton");
+        var body = container.querySelectorAll(".roadMapPoint");
+          btn.forEach((click) => {
+          click.onclick = () => {
+            var ball = container.querySelector(".ball");
+            ball.classList.remove("ball");
+            switch (click.dataset.direction) {
+              case "<":
+              var position = ((ball.dataset.id-2) % body.length + body.length)%body.length;
+              body[position].classList.add("ball");
+                break;
+              case ">":
+              var position = (ball.dataset.id % body.length + body.length)%body.length;
+              body[position].classList.add("ball");
+                break;
+
+              default:
+                break;
+            }
+            if (position == body.length-1) {
+              btn[1].setAttribute('disabled', true);
+            } else if (position == 0) {
+              btn[0].setAttribute('disabled', true);
+            } else {
+              btn[0].removeAttribute('disabled');
+              btn[1].removeAttribute('disabled');
+            }
+          };
+        });
+      });
+    </script>
+  </body>
+</html>
