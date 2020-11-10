@@ -55,14 +55,21 @@ var tab = document.querySelectorAll(".tab");
 //   };
 // });
 
-buts.forEach((el) => {
+let render = () => {
+  for (let i = 0; i < tab.length; i++) {
+    tab[i].classList.remove("active");
+  }
+};
+
+buts.forEach( function click(el) {
   el.onclick = () => {
-    tab[el.dataset.tab - 1].classList.toggle("active");
+    render();
+    tab[el.dataset.tab-1].classList.toggle("active");
   };
 });
 
-tab.forEach((eltab) => {
+tab.forEach( function hideAllTabs(eltab) {
   eltab.onclick = () => {
-    tab[eltab.dataset.tab - 1].classList.remove("active");
-  };
+    eltab.classList.toggle("active");
+  }
 });
