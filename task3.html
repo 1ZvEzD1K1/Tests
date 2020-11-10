@@ -33,14 +33,31 @@
       При нажатии на кнопку close окно дожно закрываться.
 
     */
-var popbut = document.querySelectorAll('.popup__button');
-var popit = document.querySelectorAll('.popup__item');
+var buts = document.getElementById('target');
+    var popup = document.getElementById('popup');
+    var list = popupWrap.querySelectorAll('[data-popup]');
 
-popbut.forEach((el) => {
-  el.onclick = () => {
-    popit[el.dataset.popup - 1].classList.toggle("show");
-  };
-});
+    buts.addEventListener('click', function(e){      
+      if(!e.target.matches('button[data-popup]')) return;
+
+      popup.style.display = 'block';
+
+      var targetPopup = Array.from(list).find( x => {
+       return x.dataset.popup == e.target.dataset.popup
+      });
+
+      targetPopup.style.display = 'block';      
+    })
+
+    var closePopupBtn = document.getElementById('popup__close');
+
+    closePopupBtn.addEventListener('click', function() {
+      popup.style.display = 'none';
+      list.forEach( x => {        
+          x.style.display = 'none';        
+      });
+    });
+
 
   </script>
 </body>
