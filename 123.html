@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    #myForm {
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+      }
+</style>
+<body>
+    <form id="myForm" >
+        <input type="text" id="name" placeholder="Your name" required minlength="2">
+        <input type="email" id="email" placeholder="Your email" required minlength="3" >
+        <input type="password" id="pass" placeholder="Your pass" required minlength="8" maxlength="16">
+        <input type="number" id="apple" placeholder="Number of apple" required min="0" >
+        <input type="text" id="thanks" placeholder="А как же благодарность?"  required required>
+        <input type="checkbox" id="study" required>
+        <input type="submit" id="submit" value="Send">
+        <button id="btn" type="button"> Validate </button>
+    </form>
+    <script src="Task1.js"></script>
+</body>
+</html>
