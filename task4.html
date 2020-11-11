@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form work1</title>
+    <script>
+      /*
+      Задание:
+
+      1. Сгенерировать список стран в Select countries
+      2. При выборе страны генерировать еще один Select со списком
+        городов этой страны и вывести этот селект в блок result
+      3. При выборе города нужно случайно рандомить температуру от
+      -10 градусов до +40. Если температура
+
+        -10 до 0 то 'Солнечно' 'Легкий снегопад' 'Сильный снегопад'
+        0 до 30 то  'Солнечно' 'Дождь' 'Ветер' 'Сильный дождь'
+        30 до 40 то 'Солнечно' 'Засуха' 'Ветер'
+
+      4. Вывести сообщение на страничку
+        {Country}. В {City} {Weather} {Temperature} градусов.
+        Ukraine. В Kyiv Солнечно -10 градусов
+
+        + бонус добавить красивые картинки с погодой
+    */
+      window.addEventListener("load", function () {
+        var countries = ["Ukraine", "Poland", "USA"];
+        var citys = {
+          ukraine: ["Kyiv", "Lviv", "Odesa", "Charkiv"],
+          poland: ["Warszawa", "Poznan", "Krakow", "Katowice"],
+          usa: ["New York", "Los Angeles", "Las Vegas", "Chicago"],
+        };
+
+        var renderArea = document.getElementById("countries");
+
+        countries.forEach((count) => {
+          var countrie = document.createElement("option");
+          countrie.innerText = count;
+          countrie.value = count;
+          renderArea.appendChild(countrie);
+        });
+
+        var sel = document.createElement("select");
+        sel.id = "sel";
+        var res = document.getElementById("result");
+
+        renderArea.addEventListener("change", () => {
+          if (res.contains(document.getElementById("sel"))) {
+            document.getElementById("sel").innerHTML = "";
+            res.innerHTML = "";
+          }
+          citys[renderArea.value.toLowerCase()].forEach((el) => {
+            var city = document.createElement("option");
+            city.innerText = el;
+            city.value = el;
+            sel.appendChild(city);
+            res.appendChild(sel);
+          });
+        });
+
+      //   -10 до 0 то ['Солнечно', 'Легкий снегопад', 'Сильный снегопад']
+      //   0 до 30 то  ['Солнечно', 'Дождь', 'Ветер', 'Сильный дождь']
+      //   30 до 40 то ['Солнечно', 'Засуха', 'Ветер']
+
+      // 4. Вывести сообщение на страничку
+      //   {Country}. В {City} {Weather} {Temperature} градусов.
+      //   Ukraine. В Kyiv Солнечно -10 градусов
+        var wether = document.getElementById('wether');
+        sel.addEventListener('change', ()=>{
+          let temp = Math.floor(-10+50*Math.random());
+          switch (true) {
+            case (temp <= 0):
+            var wethers = ['Солнечно', 'Легкий снегопад', 'Сильный снегопад'];
+            break;
+            case (temp <= 30):
+            var wethers = ['Солнечно', 'Дождь', 'Ветер', 'Сильный дождь'];
+            break;
+            case (temp <= 40):
+            var wethers = ['Солнечно', 'Засуха', 'Ветер'];
+            break;
+            default:
+            break;
+          }
+          let abst = Math.abs(temp);
+          switch (true) {
+            case (abst >= 10 && abst < 20):
+            var tword = 'градусов';
+            break;
+            case (abst%10 >= 2 && abst%10 <= 4):
+            var tword = 'градусa';
+            break;
+            case (abst%10 == 1):
+            var tword = 'градус';
+            break;
+            default:
+            var tword = 'градусов';
+            break;
+          }
+          wether.innerText =  `${renderArea.value}. В ${sel.value} ${wethers[Math.floor(Math.random()*wethers.length)].toLowerCase()}, ${temp} ${tword}.`
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <select id="countries"></select>
+    <div id="result"></div>
+    <div id="wether"></div>
+  </body>
+</html>

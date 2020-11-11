@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+        Сделать шиблонизатор элемента по:
+        Ширине input type=range
+        Цвету  input type=color
+        Высоте input type=number
+        Скругление углов input type=number
+        Margin input type=number
+
+      Свойсвта: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+
+        + Сделать выборку цвета из рандомных 20 цветов которые выбираются из появившегося блока :
+        https://s3.envato.com/files/230412754/screenshots/1.png
+        За заготовку для рандома цвета использовать функцию из первых занятий.
+
+    */
+
+    window.addEventListener("load", function () {
+      var myWidth = document.getElementById('myWidth');
+      var result = document.getElementById('test'); 
+      var myColor = document.getElementById('myColor');
+      var myHeight = document.getElementById('myHeight');
+      var myBorder = document.getElementById('myBorder');
+      var myMargin = document.getElementById('myMargin');
+      
+      myWidth.addEventListener('input', function(width){
+        result.style.width = width.target.value + 'px';
+      });
+
+      myColor.addEventListener('input', function(col){
+        result.style.background = col.target.value;
+      });
+
+      myHeight.addEventListener('input', function(height){
+        result.style.height = height.target.value + 'px';
+      });
+
+      myBorder.addEventListener('input', function(border){
+        result.style.borderRadius = border.target.value + 'px';
+      });
+
+      myMargin.addEventListener('input', function(margin){
+        result.style.margin = margin.target.value + 'px';
+      });
+
+    });
+
+  </script>
+
+  <style>
+    #test {
+      width: 400px;
+      height: 400px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="Templating">
+    <form>
+      <input type="range" id="myWidth" min="10" max="500" step="10"/>
+      <input type="color" id="myColor" min="10" max="500" step="10"/>
+      <input type="range" id="myHeight" min="10" max="500" step="10"/>
+      <input type="number" id="myBorder" min="10" max="500" step="10"/>
+      <input type="number" id="myMargin" min="10" max="500" step="10"/>
+    </form>
+
+  
+  </div>
+  <div id="test">
+  </div>
+
+  <style>
+    #colors{
+      width: 200px;
+
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .circle{
+      width: 30px;
+      height: 30px;
+      background: #eee;
+      border-radius: 50%;
+    }
+  </style>
+</body>
+</html>
