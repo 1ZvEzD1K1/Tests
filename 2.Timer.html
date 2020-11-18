@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hw</title>
+  </head>
+  <body>
+    <button type="button" id="mybut">Start</button>
+    <button type="button" id="revers">Revers</button>
+    <button type="button" id="mybutdel">Nulllll</button>
+    <div
+      id="myDIV"
+      style="
+        width: 50px;
+        height: 400px;
+        background-color: green;
+        margin: 0px auto;
+      "
+    ></div>
+    <div id="timer" style="font-size: 500px; text-align: center"></div>
+    <!--
+        Создайте счетчик секунд, который начинает отчет с 1 и заканчивается на 30,
+        также добавьте кнопки который останавливают отчет, и запускают его заново и добавьте кнопку обнуляющую отчет.
+        Также попробуйте изменить код так чтобы отчет начиналься с 30 и заканчивалься на 1.
+
+       + бонус: Сделать так что бы на каждый тик (1с/2c) менялся цвет фона. Можно на основе генератора случайного цвета с предудущих уроков.
+       + бонус: Сделать визуализацию стрелки которая идет по кругу
+            document.getElementById("myDIV").style.transform = "rotate(7deg)";
+
+       + бонус: Сделать кнопки которые выбирают режим в котором идет отсчет - обычный от 0 до 30 или реверсивный от 30 до 0
+      -->
+    <script>
+      var start = document.getElementById("mybut");
+      var timer = document.getElementById("timer");
+      var rev = document.getElementById("revers");
+      var arrow = document.getElementById("myDIV");
+      var counter = true;
+      var tim = 1;
+
+      var time;
+      start.addEventListener("click", () => {
+        if (counter) {
+          time = setInterval(() => {
+            timer.innerText = tim;
+            tim++;
+            randColor();
+            if (tim >= 31) {
+              clearInterval(time);
+              counter = !counter;
+            };
+          }, 100);
+        } else {
+          clearInterval(time);
+        }
+        counter = !counter;
+      });
+
+      rev.addEventListener("click", () => {
+        if (counter) {
+          revTime = setInterval(() => {
+            timer.innerText = tim;
+            tim--;
+            randColor();
+            if (tim <= -1) {
+              clearInterval(revTime);
+              counter = !counter;
+            };
+          }, 100);
+        } else {
+          clearInterval(revTime);
+        }
+        counter = !counter;
+      });
+
+
+      const randColor = () => {
+        arrow.style.transform = "rotate("+tim*5.8+"deg)";
+        document.body.style.background =
+          "rgb(" +
+          randomColor(0, 255) +
+          "," +
+          randomColor(0, 255) +
+          "," +
+          randomColor(0, 255) +
+          ")";
+      };
+
+      var nullll = document.getElementById("mybutdel");
+      nullll.onclick = () => {
+        if (counter) {
+          tim = 0;
+          clearInterval(time);
+          counter = true;
+          timer.innerText = tim;
+        } else {
+          tim = 0;
+          clearInterval(time);
+          counter = !counter;
+          timer.innerText = tim;
+        }
+      };
+
+      function randomColor(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    </script>
+  </body>
+</html>

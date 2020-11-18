@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cwk</title>
+
+</head>
+<body>
+<div>
+  <input type="text" placeholder="course" id="inp">
+  <p id="search"></p>
+  <ul id="res">
+
+  </ul>
+
+  <select id="stars"></select>
+  <select id="dur"></select>
+  <div id="search2"></div>
+</div>
+
+<script>
+
+  /*
+    Задание:
+    1. При помощи методов изложеных ниже, переформатировать ITEA_COURSES в массив который содержит длину строк каждого из элементов.
+    2. Отфильтровать массив ITEA_COURSES по алфавиту.
+        + Бонусный бал. Вывести на страничку списком
+    3. Реализация функции поиска по массиву ITEA_COURSES.
+        + Бонусный бал. Вывести на страничку инпут и кнопку по которой будет срабатывать поиск.
+  */
+
+  const ITEA_COURSES = ["Cours HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+  var lengthArr = ITEA_COURSES.map((item)=>{
+    return item.length;
+  });
+  console.log(lengthArr);
+
+  var inp = document.getElementById('inp');
+  var p = document.getElementById('search')
+  inp.addEventListener('input', ()=>{
+    if (ITEA_COURSES.includes(inp.value)) {
+      p.innerText = inp.value
+    } else {
+      p.innerText = "";
+    }
+  })
+  var ul = document.getElementById('res');
+  var filterArr = ITEA_COURSES.sort();
+  console.log("filterArr", filterArr);
+  filterArr.forEach((item)=>{
+    //var li = document.createElement('li');
+    ul.innerHTML += '<li>'+item+'</li>';
+    //ul.appendChild(li);
+  });
+  
+
+  /*
+    Задание 2:
+    Написать фильтр массива по:
+    Актеру, продолжительности
+
+    Бонус:
+      Сделать графическую оболочку для программы:
+      - Селект со списком актеров
+      - Селект или инпут с продолжительностью
+      - Результат в виде списка фильмов
+  */
+
+    var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+    var movies = [
+          {
+            name: "Lord of the Rigs",
+            duration: 240,
+            starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
+          },
+          {
+            name: "Star Wars: Episode I - The Phantom Menace",
+            duration: 136,
+            starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
+          },
+          {
+            name: "Fargo",
+            duration: 100,
+            starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+          },
+          {
+          name: "V for Vendetta",
+          duration: 150,
+          starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
+        }
+      ];
+
+      var resStars = document.getElementById('stars');
+      var durat = document.getElementById('dur');
+
+      stars.forEach((star)=>{
+        var opt = document.createElement("option");
+        opt.innerText = star;
+        resStars.appendChild(opt);
+      })
+
+      var resDur = movies.map((item)=>{
+        return item.duration;
+      });
+
+      resDur.forEach((item)=>{
+        var opt2 = document.createElement("option");
+        opt2.innerText = item;
+        durat.appendChild(opt2);
+      });
+
+      var div = document.getElementById('search2');
+
+      resStars.addEventListener("change", ()=>{
+        div.innerHTML = '';
+        movies.forEach((star)=>{
+          if (star.starring.includes(resStars.value)) {
+            div.innerHTML += '<p>'+star.name+'</p>';
+          } else {
+            div.innerHTML += '';
+          }
+        })
+      })
+
+      durat.addEventListener("change", ()=>{
+        div.innerHTML = '';
+        movies.forEach((dura)=>{
+          if (dura.duration == durat.value) {
+            div.innerHTML += '<p>'+dura.name+'</p>';
+          }
+        })
+      })
+
+  </script>
+</body>
+</html>

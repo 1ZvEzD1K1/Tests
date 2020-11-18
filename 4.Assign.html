@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cw</title>
+
+    <script>
+      /*
+      Задание:
+        1. Используя интерфейс который есть на страничке, написать визуальный
+        конструктор обектов используя значение key-value, которые вводятся в
+        соответствующие поля в форме.
+
+        2. Каждый созданый обьект выводить в тег code после добавления каждого
+        нового поля. Т.е мы должны визуально видить в каком состоянии наши обьекты
+        сейчас
+
+        3. По нажатию кнопки Combine Objects! два обьекта должны обьедениться
+        используя метод Object.assing или spread operator и вывестись на стринчку.
+
+        * Изменять HTML можно.
+
+    */
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="assigned">
+        <form class="ObjForm">
+          <input name="key" placeholder="Enter your key" />
+          <input name="value" placeholder="Enter your value" />
+          <button type="button">Send</button>
+        </form>
+        <div class="createResult">
+          <header>Created Object</header>
+          <div class="createdObj">
+            <code></code>
+          </div>
+        </div>
+      </div>
+
+      <div class="assigned">
+        <form class="ObjForm">
+          <input name="key" placeholder="Enter your key" />
+          <input name="value" placeholder="Enter your value" />
+          <button type="button">Send</button>
+        </form>
+        <div class="createResult">
+          <header>Created Object</header>
+          <div class="createdObj">
+            <code></code>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resultBlock">
+      <button>Combine Objects!</button>
+      <h3>Result:</h3>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      var mainForms = document.getElementsByClassName("ObjForm");
+      var ress = document.getElementsByClassName("createdObj");
+      var arrMainForms = Array.from(mainForms);
+      var arrRess = Array.from(ress);
+
+      // function Obj(key,val){
+      //   this.key = val;
+      // }
+
+      arrMainForms.forEach((form) => {
+        var btn = form.querySelector("button");
+        btn.onclick = (b) => {
+          //var key = form.elements.key.value;
+          //var val = form.elements.value.value;
+          var data = {
+            'key': form.elements.key.value, 
+            'value': form.elements.value.value
+          };
+          b.target.parentNode.parentNode.querySelector('.createResult .createdObj code').innerText += JSON.stringify(data);
+          //var newObj = new Obj(key, val);
+        };
+      });
+
+    </script>
+    <style>
+      .wrap {
+        width: 800px;
+      }
+      .ObjForm,
+      .resultBlock {
+        display: inline;
+        flex-direction: column;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: 10px 20px;
+      }
+
+      .assigned {
+        width: 300px;
+      }
+      .createResult header {
+        font-weight: 700;
+      }
+      code {
+        width: 100px;
+      }
+    </style>
+  </body>
+</html>
