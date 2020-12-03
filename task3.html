@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Задание 1:
+
+      // Написать обьект Train у которого будут свойства:
+      // -имя,
+      // -скорость езды
+      // -количество пассажиров
+      // Методы:
+      // Ехать -> Поезд {name} везет { количество пассажиров} со скоростью {speed}
+      // Стоять -> Поезд {name} остановился. Скорость {speed}
+      // Подобрать пассажиров -> Увеличивает кол-во пассажиров на Х
+
+      var Train = {
+        name: "Me You",
+        speed: "9999999 km/h",
+        humans: 0,
+        go: function () {
+          console.log(
+            "Train " +
+              this.name +
+              " transport " +
+              this.humans +
+              " humans with speed " +
+              this.speed
+          );
+        },
+        state: function () {
+          console.log(`Train ${this.name} stopping. Speed 0`);
+        },
+        takeAHuman: function () {
+          this.humans++;
+        },
+      };
+
+      Train.go();
+      Train.state();
+      Train.takeAHuman();
+      Train.go();
+    </script>
+  </body>
+</html>

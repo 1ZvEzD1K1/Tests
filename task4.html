@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="res">
+      <p>Index | Company | Email | Phone | Address</p>
+    </div>
+    <!-- 
+    1. При помощи fetch получить данные:
+     http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2
+    2. Полученый ответ преобразовать в json вызвав метод .json с объекта ответа
+    3. На основе данных посторить табличку
+
+    | index | company | email | phone | address |
+
+    4. создать кнопу которая скрывает показывает address
+     -->
+    <script>
+      var URLL =
+        "http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2";
+      async function getCompany() {
+        const getJSONCompany = await fetch(URLL);
+        return getJSONCompany;
+      }
+
+      let Companys = getCompany();
+      Companys.then((item) => {
+        return item.json();
+      }).then((el) => {
+        console.log(el);
+        el.forEach((comp) => {
+          var res = document.getElementById("res");
+          res.innerHTML += `<div>${comp.index} | ${comp.company} | ${comp.email} | ${comp.phone} | <span><button class="adres">Show adress</button><span style="display: none">${ comp.address}</span></span></div`;
+
+            var btn = document.getElementsByClassName("adres");
+            var btnarr = Array.from(btn);
+            btnarr.forEach((btnel) => {
+                btnel.onclick = () => {
+                var parent = btnel.parentElement;
+                var span = parent.querySelector("span");
+                span.style.display = "";
+                 btnel.hidden = true;
+                };
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<!-- var btn1 = document.getElementsByClassName("data");
+var btn1arr = Array.from(btn1);
+btn1arr.forEach((btn1el) => {
+  btn1el.onclick = () => {
+    var parent = btn1el.parentElement;
+    var span = parent.querySelector("span");
+    span.style.display = "";
+    btn1el.hidden = true;
+  };
+}); -->

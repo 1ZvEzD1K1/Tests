@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forms Task 1</title>
+  
+</head>
+<body>
+  <form id="MyValidateForm">
+    <input type="text" name='login' placeholder="Ваш логин" />
+    <input type="password" name='pas1' placeholder="Ваш пароль" class="pass"/>
+    <input type="password" name='pas2' placeholder="Повторите пароль" class="pass"/>
+    <label for="agree">
+      <span>Вы согласны с лицензионым соглашением.</span>
+      <input type="checkbox" id="agree" />
+    </label>
+    <input type="submit" id="submit" value="Отправить" disabled/>
+  </form>
+
+  <style>
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .error{
+        border: 1px solid red;
+    }
+    .OK{
+        border: 1px solid green;
+    }
+  </style>
+  <script>
+    /*
+      Задание:
+        Сделать валидацию формы:
+        1. Логин / Пароль не может быть пустым
+        2. то поле, которое не прошло валидацию подсвечивать красным, которое прошло - подсвечивать зеленым.
+        3. Пока не стоит что юзер согласен с лиц. соглашением - кнопка отправки не активна
+    */
+    window.addEventListener('load', function () {
+          var form = document.getElementById('MyValidateForm');
+          var log = form.elements.login;
+          
+          log.addEventListener('change', function () {
+            if (log.value.length < 1) {
+              log.style.border = '3px solid red';
+            } else {
+              log.style.border = '3px solid green';
+            }
+          });
+
+            var inp1 = form.elements.pas1;
+            inp1.addEventListener('change', function () {
+              if (inp1.value.length < 1) {
+                inp1.style.border = '3px solid red';
+              } else {
+                inp1.style.border = '3px solid green';
+              }
+            });
+
+            var inp2 = form.elements.pas2;
+            inp2.addEventListener('change', function () {
+              if (inp2.value.length < 1) {
+                inp2.style.border = '3px solid red';
+              } else {
+                inp2.style.border = '3px solid green';
+              }
+            });
+
+          var btn = document.getElementById('submit');
+          var checkbox = document.getElementById('agree');
+          
+          checkbox.addEventListener('click', function () {
+            if (checkbox.checked && inp1.value == inp2.value) {
+              btn.disabled = false;
+            } else {
+              btn.disabled = true;
+            }
+          })
+
+        })
+  </script>
+</body>
+</html>
