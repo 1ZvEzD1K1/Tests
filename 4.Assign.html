@@ -60,28 +60,42 @@
     </div>
 
     <script>
-      var mainForms = document.getElementsByClassName("ObjForm");
-      var ress = document.getElementsByClassName("createdObj");
-      var arrMainForms = Array.from(mainForms);
-      var arrRess = Array.from(ress);
+      document.addEventListener('DOMContentLoaded', () => {
+        let firstForm = document.getElementById('firstForm');
+        let secondForm = document.getElementById('secondForm');
+        let combineBtn = document.getElementById('combineBtn');
+        let result = document.getElementById('result');
+        let firstElem = document.getElementById('firstCode');
+        let secondElem = document.getElementById('secondCode');
 
-      // function Obj(key,val){
-      //   this.key = val;
-      // }
+        const firstObj = {};
+        const secondObj = {};
+        let combinedObj = {};
 
-      arrMainForms.forEach((form) => {
-        var btn = form.querySelector("button");
-        btn.onclick = (b) => {
-          //var key = form.elements.key.value;
-          //var val = form.elements.value.value;
-          var data = {
-            'key': form.elements.key.value, 
-            'value': form.elements.value.value
-          };
-          b.target.parentNode.parentNode.querySelector('.createResult .createdObj code').innerText += JSON.stringify(data);
-          //var newObj = new Obj(key, val);
-        };
-      });
+        const manipulateObj = (e, obj, elem) => {
+          e.preventDefault();          
+
+          obj[e.target.value.value] = e.target.key.value;
+
+          elem.innerText = JSON.stringify(firstObj);
+        }
+
+        const manipulateObjShort = (obj, elem) => (e) => {
+          e.preventDefault();          
+
+          obj[e.target.value.value] = e.target.key.value;
+
+          elem.innerText = JSON.stringify(firstObj)
+        }
+
+        const renderObj = () => {
+          combinedObj = {
+            ...firstObj,
+            ...secondObj
+          }
+
+          result.innerText = JSON.stringify(combinedObj);
+        }
 
     </script>
     <style>
