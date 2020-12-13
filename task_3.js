@@ -81,34 +81,40 @@ window.addEventListener("DOMContentLoaded", () => {
         )
     }
 
+    var objPosts = [];
+    const GetSavedPosts = () => {
+        let data = localStorage.getItem('Posts');
+    
+        if (data !== null) {
+            objPosts = JSON.parse(data);
+            return objPosts;
+        }
+    
+        return null;
+    }
 
-    try {
-       console.log(localStorage.getItem("Posts"));
-       console.log(localStorage.getItem("maxId"));
-    } catch(e) {
-        localStorage.setItem("maxId", 1)
-        localStorage.setItem("Posts", JSON.stringify([]))
+    var obj = GetSavedPosts();
+
+    if (obj !== null) {
+        obj.forEach(function (post) {
+            new Statue(post.about, post.created_at, post.isActive, post.likes, post.title, post._id);            
+        })   
     }
 
     var createBtn = document.getElementById('create');
     var about = document.getElementById('about');
     var title = document.getElementById('title');
-    var dateOfCreate = Date();
-    var maxId = localStorage.getItem("maxId");
-    var objPosts = [];
 
     createBtn.onclick = () => {
         if (title.value !== "" || about.value !== "" ) {
-            //var objPosts = localStorage.getItem("Posts").json();
-            var createElement = new Statue(maxId, "true", title.value, about.value, dateOfCreate);
+            var dateOfCreate = new Date();
+            var createElement = new Statue(dateOfCreate, "true", title.value, about.value, dateOfCreate);
             objPosts.push(createElement);
-            console.log(objPosts)
             localStorage.setItem("Posts", JSON.stringify(objPosts));
             createElement.render();
-            maxId++;
-            localStorage.setItem("maxId", maxId);
         } else {
             alert("Enter something");
         }
     }
 });
+
